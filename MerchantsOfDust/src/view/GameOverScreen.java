@@ -15,7 +15,7 @@ import buttonControllers.ExitBController;
 public class GameOverScreen extends JPanel{
 
 	private static int winner;
-
+	
 	
 	public GameOverScreen() {
 		
