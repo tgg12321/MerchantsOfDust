@@ -14,12 +14,16 @@ public class MainView extends JFrame{ //View is a frame with a Cardlayout, to ch
 	private OptionsMenu optionsMenu;
 	private GameOverScreen gameOver;
 	private GamePlayScreen gamePlay;
+	private AssetScreen assets;
+	private RawMaterialsScreen rawScreen;
+	private TasksScreen tasks;
+	
 	public static CardLayout c1;
 
 	
 	public MainView(){
 		
-		super("Merchants Of Dust");
+		super("World Sim");
 		c1=new CardLayout();
 		
 		mainViewScreen=new JPanel();
@@ -39,7 +43,22 @@ public class MainView extends JFrame{ //View is a frame with a Cardlayout, to ch
 		gamePlay = new GamePlayScreen();
 		mainViewScreen.add(gamePlay, "Game");
 		
+		assets = new AssetScreen();
+		mainViewScreen.add(assets, "Assets");
 		
+		rawScreen = new RawMaterialsScreen();
+		mainViewScreen.add(rawScreen, "Raw");
+		
+		tasks = new TasksScreen();
+		mainViewScreen.add(tasks, "Tasks");
+		
+		
+	
+		
+	}
+	
+	public static CardLayout getCardLayout(){
+		return c1;
 	}
 	
 
