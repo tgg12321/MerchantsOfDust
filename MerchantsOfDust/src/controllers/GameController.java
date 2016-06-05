@@ -12,11 +12,10 @@ public class GameController {
 	private static JProgressBar progressBar;
 	private NextDayButtonController nDayBC;
 	private JButton nextDayButton;
-	private static int workerCount, maxWorkers;
+	
 	
 	public GameController() {
-		workerCount=5;
-		maxWorkers=workerCount;
+
 		bnextDay=false;
 		progressBar = new JProgressBar();
 		day=1;
@@ -47,9 +46,8 @@ public class GameController {
 			day++;
 			progressBar.setString("Day "+ day);
 			bnextDay=false;
-			workerCount=maxWorkers;
-			TasksScreen.resetCommittedWorkers();
-			TasksScreen.repaintWorkerButton();
+			TasksScreenController.triggerNextDay();
+			
 		
 			
 	}
@@ -57,13 +55,7 @@ public class GameController {
 		bnextDay=true;
 	}
 	
-	public static int getWorkerCount(){
-		return workerCount;
-	}
 	
-	public static void setWorkerCount(int s){
-		workerCount=s;
-	}
 	
 	
 	

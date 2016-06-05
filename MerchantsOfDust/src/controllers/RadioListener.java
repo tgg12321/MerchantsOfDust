@@ -11,14 +11,13 @@ public class RadioListener implements ActionListener{
 
 	private JRadioButtonMenuItem button;
 	public RadioListener(JRadioButtonMenuItem b) {
+		
 		button=b;
-	
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		TasksScreen.setWorkerString(button.getActionCommand());
-		
+		TasksScreenController.setWorkerString(button.getActionCommand());
 	}
 
 }

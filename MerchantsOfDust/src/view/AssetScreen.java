@@ -5,8 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
-import java.awt.Choice;
+
 
 public class AssetScreen extends JPanel{
 
