@@ -2,34 +2,33 @@ package buttonControllers;
 
 import javax.swing.JRadioButtonMenuItem;
 
+import model.GatheringTask;
+
 public class JRadioWorkerButton extends JRadioButtonMenuItem {
 
-	private int workersCommitted;
+	private GatheringTask gt;
 	private String name;
 	public JRadioWorkerButton() {
 		super();
 	}
 	
-	public JRadioWorkerButton(String s){
+	public JRadioWorkerButton(String s, GatheringTask g){
 		super(s);
 		name=s;
-		if(workersCommitted!=0){
-			this.setText(s+ " "+ workersCommitted);
+		gt=g;
+		
+		if(gt.getWorkersCommitted()!=0){
+			this.setText(s+ " "+ gt.getWorkersCommitted());
 		}
 	}
-	public void addWorker(){
-		workersCommitted++;
-	}
-	public int getWorkersCommitted(){
-		return workersCommitted;
-	}
+	
 	
 	public String getName(){
 		return name;
 	}
 	
-	public void setWorkersCommitted(int i){
-		workersCommitted=i;
+	public GatheringTask getGatheringTask(){
+		return gt;
 	}
 	
 }

@@ -2,21 +2,22 @@ package buttonControllers;
 
 import java.awt.event.ActionEvent;
 
-import controllers.GameController;
 import controllers.TasksScreenController;
 
 public class CommitWorkerController extends ButtonController{
-
-	public CommitWorkerController() {
-		
+	
+	private TasksScreenController tController;
+	public CommitWorkerController(TasksScreenController tc) {
+		tController=tc;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if((TasksScreenController.getWorkerCount()>0)){
-			TasksScreenController.setWorkerCount((TasksScreenController.getWorkerCount())-1);
-			TasksScreenController.repaintWorkerButton();
-			TasksScreenController.workerCommitted();
+		if((tController.getTasksModel().getWorkerCount()>0)){
+			tController.getTasksModel().setWorkerCount((tController.getTasksModel().getWorkerCount())-1);
+			tController.getTasksScreenView().repaintWorkerButton();
+			tController.getTasksScreenView().workerCommitted();
+			
 		}
 		
 	}

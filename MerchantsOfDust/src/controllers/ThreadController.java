@@ -1,25 +1,27 @@
 package controllers;
 
-public class ThreadController implements Runnable {
 
-	public ThreadController() {
-		 
+public class ThreadController implements Runnable {
+	
+	private NextDayController nController;
+	public ThreadController(NextDayController nc) {
+		 nController=nc;
 	}
 
 	@Override
 	public void run() {
 		
 		for (int i=0; i<=100; i++){
-			    GameController.setProgress(i);
-			    GameController.repaintProgress();
+			   nController.getNextDayScreen().setProgress(i);
+			   nController.getNextDayScreen().repaintProgress();
 			   
 			    try{Thread.sleep(15);}
 			    catch (InterruptedException err){}
 			
 			}
 
-		   GameController.nextDay();
-		   GameController.setProgress(0);
+		nController.getNextDayScreen().nextDay();
+		nController.getNextDayScreen().setProgress(0);
 	}
 
 }

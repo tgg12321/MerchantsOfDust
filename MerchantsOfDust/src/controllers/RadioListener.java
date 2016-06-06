@@ -17,7 +17,7 @@ public class RadioListener implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		TasksScreenController.setWorkerString(button.getActionCommand());
+		TasksScreen.setWorkerString(button.getActionCommand());
 	}
 
 }

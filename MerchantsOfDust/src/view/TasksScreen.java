@@ -11,19 +11,24 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 
+import model.GatheringTask;
+import model.TasksModel;
 import buttonControllers.CommitWorkerController;
 import buttonControllers.JRadioWorkerButton;
-import controllers.GameController;
 import controllers.RadioListener;
 import controllers.TasksScreenController;
 
 public class TasksScreen extends JPanel{
 
-	private TasksScreenController tController;
+	private static ButtonGroup bGroup;
+	private static JButton btnCommitWorker;
+	private static JLabel label;
+	private static TasksScreenController tController;
 	
-	public TasksScreen() {
+	public TasksScreen(TasksScreenController tc) {
 		this.setSize(800, 800);
-		tController = new TasksScreenController();
+		tController= tc;
+		
 		JButton gameButton = new JButton("Back");
 		gameButton.setBounds(23, 716, 96, 41);
 		gameButton.addActionListener(new ActionListener() {
@@ -32,14 +37,18 @@ public class TasksScreen extends JPanel{
 				MainView.getCardLayout().show(MainView.mainViewScreen, "Game");
 			}
 		});
+		
+		label = new JLabel("No Task Selected");
+		bGroup= new ButtonGroup();
+		btnCommitWorker= new JButton("Commit Worker " +"( "+ tController.getTasksModel().getWorkerCount()+ " )");
+		btnCommitWorker.addActionListener(new CommitWorkerController(tController));
 		setLayout(null);
 		add(gameButton);
 		
-		JButton btnCommitWorker = tController.getCommitButton();
 		btnCommitWorker.setBounds(284, 716, 197, 41);
 		add(btnCommitWorker);
 		
-		ButtonGroup bGroup= tController.getButtonGroup();
+		
 							
 		JPanel panel = new JPanel();
 		panel.setBounds(107, 87, 76, 346);
@@ -55,34 +64,70 @@ public class TasksScreen extends JPanel{
 		
 		bGroup.add(mnMining);						
 		mnMining.setEnabled(true);
-								
-		JRadioWorkerButton rdbtnmntmIron = new JRadioWorkerButton("Iron");
 		
-		mnMining.add(rdbtnmntmIron);
-		bGroup.add(rdbtnmntmIron);	
-		rdbtnmntmIron.addActionListener(new RadioListener(rdbtnmntmIron));
-		rdbtnmntmIron.setActionCommand("Mining Iron");	
-		tController.addToTaskList(rdbtnmntmIron);
+		fillJMenu("Mining", mnMining, tController.getTasksModel(), bGroup);
 		
-		JRadioWorkerButton rdbtnmntmCopper = new JRadioWorkerButton("Copper");
-		mnMining.add(rdbtnmntmCopper);
-		bGroup.add(rdbtnmntmCopper);	
-		rdbtnmntmCopper.addActionListener(new RadioListener(rdbtnmntmCopper));
-		rdbtnmntmCopper.setActionCommand("Mining Copper");							
-		tController.addToTaskList(rdbtnmntmCopper);
 		
-		JRadioWorkerButton rdbtnmntmCoal = new JRadioWorkerButton("Coal");
-		mnMining.add(rdbtnmntmCoal);
-		bGroup.add(rdbtnmntmCoal);	
-		rdbtnmntmCoal.addActionListener(new RadioListener(rdbtnmntmCoal));
-		rdbtnmntmCoal.setActionCommand("Mining Coal");	
-		tController.addToTaskList(rdbtnmntmCoal);
-		
-		JLabel label = tController.getLabel();
-		label.setBounds(501, 729, 96, 14);
+		label.setBounds(501, 729, 145, 14);
 		add(label);
 	}
 	
+	public void fillJMenu(String category, JMenu menu, TasksModel tModel, ButtonGroup bGroup){
+		ArrayList<GatheringTask> gList= tModel.getCategoryList(category);
+		for(GatheringTask gt : gList){
+			JRadioWorkerButton button= new JRadioWorkerButton(gt.getName(), gt);
+			menu.add(button);
+			bGroup.add(button);
+			button.addActionListener(new RadioListener(button));
+			button.setActionCommand(gt.getActionCommand());
+			tController.addToTaskList(button);	
+				
+		}
+		
+	}
 
+	public JLabel getLabel(){
+		return label;
+	}
+	
+	public ButtonGroup getButtonGroup(){
+		return bGroup;
+	}
+
+	public static void setWorkerString(String w){
+		label.setText(w);
+	}
+	public static String getBGroupSelection(){
+		return bGroup.getSelection().getActionCommand();
+	}
+	
+	public JButton getCommitButton(){
+		return btnCommitWorker;
+	}
+	
+	public void repaintWorkerButton(){
+		
+		btnCommitWorker.setText("Commit Worker " + "( " + tController.getTasksModel().getWorkerCount() + " )");
+		if(tController.getTasksModel().getWorkerCount()==0){
+			btnCommitWorker.setEnabled(false);
+		}else{
+			btnCommitWorker.setEnabled(true);
+		}
+	}
+	
+	public void workerCommitted(){
+		JRadioWorkerButton worker = tController.findTask(getBGroupSelection());
+		worker.getGatheringTask().workerCommitted();
+		worker.setText(worker.getName()+ " ( "+ worker.getGatheringTask().getWorkersCommitted()+ " )");
+			
+	}
+	
+	public static void resetCommittedWorkers(){
+		for(int i =0; i< tController.getTaskList().size(); i++){
+			tController.getTaskList().get(i).getGatheringTask().setWorkersCommitted(0);
+			tController.getTaskList().get(i).setText(tController.getTaskList().get(i).getName());
+		}
+		
+	}
 	
 }

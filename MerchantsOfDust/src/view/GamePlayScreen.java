@@ -9,15 +9,19 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
-import controllers.GameController;
+import controllers.NextDayController;
 
 public class GamePlayScreen extends JPanel {
 
-	private static GameController gController;
+	private NextDayController nController;
 	private boolean running=true;
-	public GamePlayScreen() {
+	private JProgressBar progressBar;
+	
+	public GamePlayScreen(NextDayController nc) {
 		
-		gController= new GameController();
+		nController=nc;
+		progressBar = new JProgressBar();
+		progressBar.setString("Day "+ nController.getNextDayModel().getDay());
 		setLayout(null);
 		
 		JLabel lblHowWillYou = new JLabel("How will you spend your day?");
@@ -53,13 +57,13 @@ public class GamePlayScreen extends JPanel {
 		tasksButton.setBounds(126, 139, 123, 70);
 		add(tasksButton);
 		
-		JProgressBar progressBar = gController.getProgressBar();
+		
 		progressBar.setStringPainted(true);
 		progressBar.setBounds(146, 667, 507, 58);
 		add(progressBar);
 		
 		
-		JButton btnNewButton = gController.getNextDayButton();
+		JButton btnNewButton = nController.getNextDayButton();
 		btnNewButton.setBounds(355, 632, 89, 23);
 		add(btnNewButton);
 		
@@ -68,4 +72,24 @@ public class GamePlayScreen extends JPanel {
 		
 		
 	}
+	public void setProgress(int x){
+		progressBar.setValue(x);
+	}
+	
+	public void repaintProgress(){
+		progressBar.repaint();
+	}
+	public void nextDay(){
+		
+			nController.getNextDayModel().triggerModelNextDay();
+			progressBar.setString("Day "+ nController.getNextDayModel().getDay());
+			nController.getTasksController().triggerNextDay();
+			nController.getRawMaterialsController().getRawMaterialsScreen().repaintResources();
+
+	}
+	
+	public JProgressBar getProgressBar(){
+		return progressBar;
+	}
+	
 }
