@@ -46,17 +46,17 @@ public class RawMaterialsScreen extends JPanel{
 		add(gameButton);
 		
 		panel = new JPanel();
-		panel.setBounds(10, 199, 263, 202);
+		panel.setBounds(10, 28, 391, 202);
 		add(panel);
 		panel.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Raw Ores");
-		lblNewLabel.setBounds(10, 174, 83, 14);
+		lblNewLabel.setBounds(10, 11, 83, 14);
 		add(lblNewLabel);
 		
 		int y=0;
 		for(Resource r: rController.getRawMaterialsModel().getResourceList()){
-			r.getJLabel().setBounds(0, y, 92, 26);
+			r.getJLabel().setBounds(15, y, 110, 35);
 			panel.add(r.getJLabel());
 			y+=21;
 		}
