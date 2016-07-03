@@ -5,14 +5,14 @@ import java.awt.CardLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-//import team5.project.main.Nghia;
+
 
 public class MainView extends JFrame{ //View is a frame with a Cardlayout, to change from one screen to another (like from main menu to options menu) simply use show in cardlayout
 	
 	public static JPanel mainViewScreen;
 	private MainMenu mainMenu;
 	private OptionsMenu optionsMenu;
-	private GameOverScreen gameOver;
+	
 	private GamePlayScreen gamePlay;
 	private AssetScreen assets;
 	private RawMaterialsScreen rawScreen;
@@ -36,12 +36,6 @@ public class MainView extends JFrame{ //View is a frame with a Cardlayout, to ch
 		
 		optionsMenu=new OptionsMenu();
 		mainViewScreen.add(optionsMenu,"Options");
-
-		gameOver= new GameOverScreen();
-		mainViewScreen.add(gameOver, "GameOver");
-		
-	
-		
 		
 		assets = new AssetScreen();
 		mainViewScreen.add(assets, "Assets");

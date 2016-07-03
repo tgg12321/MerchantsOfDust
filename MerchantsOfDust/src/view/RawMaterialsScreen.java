@@ -27,7 +27,7 @@ public class RawMaterialsScreen extends JPanel{
 
 	private RawMaterialsController rController;
 	private JPanel panel;
-	
+		
 	public RawMaterialsScreen(RawMaterialsController rc) {
 		
 		rController=rc;
@@ -38,10 +38,10 @@ public class RawMaterialsScreen extends JPanel{
 		JButton gameButton = new JButton("Back");
 		gameButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				MainView.getCardLayout().show(MainView.mainViewScreen, "Game");
 			}
-		});
+		});   
 		gameButton.setBounds(23, 716, 96, 41);
 		add(gameButton);
 		
@@ -64,11 +64,11 @@ public class RawMaterialsScreen extends JPanel{
 	
 	}
 	
-	public void repaintResources(){
+		public void repaintResources(){
 		 DecimalFormat df= new DecimalFormat("#.##");
-		for(Resource r: rController.getRawMaterialsModel().getResourceList()){
-		
-			r.getJLabel().setText(r.getGatheringTask().getName()+" : "+ df.format(r.getGatheringTask().getGathered())+" tons");
+		 for(Resource r: rController.getRawMaterialsModel().getResourceList()){
+			
+			r.getJLabel().setText(r.getTask().getName()+" : "+ df.format(((GatheringTask) r.getTask()).getGathered())+" tons");
 			
 		}
 	}

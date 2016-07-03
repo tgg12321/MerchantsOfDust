@@ -20,16 +20,16 @@ public class RawMaterialsModel {
 	public ArrayList<JLabel> getCollectedMaterials(String category){
 		ArrayList<JLabel> jlist= new ArrayList<JLabel>();
 		
-		for(GatheringTask gt: tModel.getCategoryList(category)){
-			jlist.add(new JLabel(gt.getName()+" Ore: "+ gt.getGathered()));
+		for(AbstractTask gt: tModel.getCategoryList(category)){
+			jlist.add(new JLabel(gt.getName()+" Ore: "+ ((GatheringTask) gt).getGathered()));
 		}
 		return jlist;
 	}
 	
 	public void fillResourceList(){
 		 DecimalFormat df= new DecimalFormat("#.##");
-		for(GatheringTask gt: tModel.getGatherList()){
-			resourceList.add(new Resource(gt,new JLabel(gt.getName()+" : "+ df.format(gt.getGathered())+ " tons")));
+		for(AbstractTask gt: tModel.getAbstractList()){
+			resourceList.add(new Resource(gt,new JLabel(gt.getName()+" : "+ df.format(((GatheringTask) gt).getGathered())+ " tons")));
 		}
 	}
 	

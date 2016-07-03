@@ -2,23 +2,23 @@ package buttonControllers;
 
 import javax.swing.JRadioButtonMenuItem;
 
-import model.GatheringTask;
+import model.AbstractTask;
 
 public class JRadioWorkerButton extends JRadioButtonMenuItem {
 
-	private GatheringTask gt;
+	private AbstractTask aTask;
 	private String name;
 	public JRadioWorkerButton() {
 		super();
 	}
 	
-	public JRadioWorkerButton(String s, GatheringTask g){
+	public JRadioWorkerButton(String s, AbstractTask a){
 		super(s);
 		name=s;
-		gt=g;
+		aTask=a;
 		
-		if(gt.getWorkersCommitted()!=0){
-			this.setText(s+ " "+ gt.getWorkersCommitted());
+		if(aTask.getWorkersCommitted()!=0){
+			this.setText(s+ " "+ aTask.getWorkersCommitted());
 		}
 	}
 	
@@ -27,8 +27,8 @@ public class JRadioWorkerButton extends JRadioButtonMenuItem {
 		return name;
 	}
 	
-	public GatheringTask getGatheringTask(){
-		return gt;
+	public AbstractTask getAbstractTask(){
+		return aTask;
 	}
 	
 }

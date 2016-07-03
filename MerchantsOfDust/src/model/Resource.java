@@ -4,15 +4,15 @@ import javax.swing.JLabel;
 
 public class Resource {
 
-	private GatheringTask gt;
+	private AbstractTask gt;
 	private JLabel label;
-	public Resource(GatheringTask g, JLabel l) {
-		gt=g;
+	public Resource(AbstractTask gt2, JLabel l) {
+		gt=gt2;
 		label=l;
 
 	}
 
-	public GatheringTask getGatheringTask(){
+	public AbstractTask getTask(){
 		return gt;
 	}
 	

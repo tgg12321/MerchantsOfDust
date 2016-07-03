@@ -6,28 +6,28 @@ public class TasksModel {
 	
 	private int workerCount, maxWorkers;
 	
-	private ArrayList<GatheringTask> gatherList;
+	private ArrayList<AbstractTask> abstractList;
 	
 	public TasksModel() {
 		
 		workerCount=5;
 		maxWorkers=workerCount;
-		gatherList= new ArrayList<GatheringTask>();
-		fillGatherList(gatherList);
+		abstractList= new ArrayList<AbstractTask>();
+		fillAbstractList(abstractList);
 	}
 	
-	public void fillGatherList(ArrayList<GatheringTask> gList){
-		gList.add(new GatheringTask("Mining Iron", "Mining", "Iron", .01, .03));
-		gList.add(new GatheringTask("Mining Copper", "Mining","Copper", .01, .03));
-		gList.add(new GatheringTask("Mining Coal", "Mining", "Coal", .01, .03));
-		gList.add(new GatheringTask("Mining Gold", "Mining", "Gold", .01, .03));
+	public void fillAbstractList(ArrayList<AbstractTask> aList){
+		aList.add(new GatheringTask("Mining Iron", "Mining", "Iron", .01, .03));
+		aList.add(new GatheringTask("Mining Copper", "Mining","Copper", .01, .03));
+		aList.add(new GatheringTask("Mining Coal", "Mining", "Coal", .01, .03));
+		aList.add(new GatheringTask("Mining Gold", "Mining", "Gold", .01, .03));
 	}
 	
-	public ArrayList<GatheringTask> getCategoryList(String category){
-		ArrayList<GatheringTask> gList= new ArrayList<GatheringTask>();
-		for(int i=0; i<gatherList.size();i++){
-			if(gatherList.get(i).getCategory().equals(category)){
-				gList.add(gatherList.get(i));
+	public ArrayList<AbstractTask> getCategoryList(String category){
+		ArrayList<AbstractTask> gList= new ArrayList<AbstractTask>();
+		for(int i=0; i<abstractList.size();i++){
+			if(abstractList.get(i).getCategory().equals(category)){
+				gList.add(abstractList.get(i));
 			}
 		}
 		return gList;
@@ -47,17 +47,18 @@ public class TasksModel {
 	}
 	
 	public void gatherAll(){
-		for(GatheringTask gt : gatherList){
-			gt.triggerGather();
+		for(AbstractTask gt : abstractList){
+		
+			((GatheringTask) gt).triggerGather();
 		}
 	}
 	
-	public ArrayList<GatheringTask> getGatherList(){
-		return gatherList;
+	public ArrayList<AbstractTask> getAbstractList(){
+		return abstractList;
 	}
 	
-	public GatheringTask findTask(String name){
-		for(GatheringTask gt : gatherList){
+	public AbstractTask findTask(String name){
+		for(AbstractTask gt : abstractList){
 			if(gt.getName().equals(name)){
 				return gt;
 			}

@@ -11,12 +11,13 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 
-import model.GatheringTask;
-import model.TasksModel;
 import buttonControllers.CommitWorkerController;
 import buttonControllers.JRadioWorkerButton;
 import controllers.RadioListener;
 import controllers.TasksScreenController;
+import model.AbstractTask;
+import model.GatheringTask;
+import model.TasksModel;
 
 public class TasksScreen extends JPanel{
 
@@ -73,8 +74,9 @@ public class TasksScreen extends JPanel{
 	}
 	
 	public void fillJMenu(String category, JMenu menu, TasksModel tModel, ButtonGroup bGroup){
-		ArrayList<GatheringTask> gList= tModel.getCategoryList(category);
-		for(GatheringTask gt : gList){
+		ArrayList<AbstractTask> gList= tModel.getCategoryList(category);
+		for(AbstractTask gt : gList){
+			
 			JRadioWorkerButton button= new JRadioWorkerButton(gt.getName(), gt);
 			menu.add(button);
 			bGroup.add(button);
@@ -117,14 +119,14 @@ public class TasksScreen extends JPanel{
 	
 	public void workerCommitted(){
 		JRadioWorkerButton worker = tController.findTask(getBGroupSelection());
-		worker.getGatheringTask().workerCommitted();
-		worker.setText(worker.getName()+ " ( "+ worker.getGatheringTask().getWorkersCommitted()+ " )");
+		worker.getAbstractTask().workerCommitted();
+		worker.setText(worker.getName()+ " ( "+ worker.getAbstractTask().getWorkersCommitted()+ " )");
 			
 	}
 	
 	public static void resetCommittedWorkers(){
 		for(int i =0; i< tController.getTaskList().size(); i++){
-			tController.getTaskList().get(i).getGatheringTask().setWorkersCommitted(0);
+			tController.getTaskList().get(i).getAbstractTask().setWorkersCommitted(0);
 			tController.getTaskList().get(i).setText(tController.getTaskList().get(i).getName());
 		}
 		
