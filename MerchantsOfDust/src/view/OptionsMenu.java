@@ -5,14 +5,14 @@ import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 //main menu, should be fairly straightforward. buttons are to be implemented w/ CController
-
-import buttonControllers.MainBController;
 
 public class OptionsMenu extends JPanel{
 	
@@ -49,7 +49,13 @@ public class OptionsMenu extends JPanel{
 		GridBagConstraints gbc_btnEXButton = new GridBagConstraints();
 		gbc_btnEXButton.gridx = 1;
 		gbc_btnEXButton.gridy = 7;
-		btnEXButton.addActionListener(new MainBController());
+
+		btnEXButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				MainView.getCardLayout().show(MainView.mainViewScreen, "Main");
+			}
+		});
 		this.add(btnEXButton, gbc_btnEXButton);
 		
 		

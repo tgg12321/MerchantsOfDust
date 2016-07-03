@@ -13,11 +13,6 @@ public class MainView extends JFrame{ //View is a frame with a Cardlayout, to ch
 	private MainMenu mainMenu;
 	private OptionsMenu optionsMenu;
 	
-	private GamePlayScreen gamePlay;
-	private AssetScreen assets;
-	private RawMaterialsScreen rawScreen;
-
-	
 	public static CardLayout c1;
 
 	
@@ -36,10 +31,6 @@ public class MainView extends JFrame{ //View is a frame with a Cardlayout, to ch
 		
 		optionsMenu=new OptionsMenu();
 		mainViewScreen.add(optionsMenu,"Options");
-		
-		assets = new AssetScreen();
-		mainViewScreen.add(assets, "Assets");
-		
 		
 		
 	}

@@ -5,16 +5,14 @@ import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 //main menu, should be fairly straightforward. buttons are to be implemented w/ CController
-
-import buttonControllers.ExitBController;
-import buttonControllers.GameButtonController;
-import buttonControllers.OptionsBController;
 
 public class MainMenu extends JPanel{
 	
@@ -38,13 +36,19 @@ public class MainMenu extends JPanel{
 		gbc_verticalStrut.gridy = 1;
 		add(verticalStrut, gbc_verticalStrut);
 		
-		JButton btnBEButton=new JButton();
+		JButton btnBEButton= new JButton();
 		btnBEButton.setText("Begin");
 		GridBagConstraints gbc_btnMPButton = new GridBagConstraints();
 		gbc_btnMPButton.insets = new Insets(0, 0, 5, 0);
 		gbc_btnMPButton.gridx = 1;
 		gbc_btnMPButton.gridy = 5;
-		btnBEButton.addActionListener(new GameButtonController());
+		
+		btnBEButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				MainView.getCardLayout().show(MainView.mainViewScreen, "Game");
+			}
+		});
 		this.add(btnBEButton, gbc_btnMPButton);
 		
 		JButton btnOPButton=new JButton();		
@@ -53,7 +57,13 @@ public class MainMenu extends JPanel{
 		gbc_btnOPButton.insets = new Insets(0, 0, 5, 0);
 		gbc_btnOPButton.gridx = 1;
 		gbc_btnOPButton.gridy = 6;
-		btnOPButton.addActionListener(new OptionsBController());
+	
+		btnOPButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				MainView.getCardLayout().show(MainView.mainViewScreen, "Options");
+			}
+		});
 		this.add(btnOPButton, gbc_btnOPButton);
 		
 		JButton btnEXButton=new JButton();
@@ -61,7 +71,12 @@ public class MainMenu extends JPanel{
 		GridBagConstraints gbc_btnEXButton = new GridBagConstraints();
 		gbc_btnEXButton.gridx = 1;
 		gbc_btnEXButton.gridy = 7;
-		btnEXButton.addActionListener(new ExitBController());
+		
+		btnEXButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
 		this.add(btnEXButton, gbc_btnEXButton);
 		
 		

@@ -1,28 +1,17 @@
 package controllers;
 
-import view.GamePlayScreen;
+import models.MainModel;
 import view.MainView;
 
-public class GameController {
-	private static MainView view;
-	private TasksScreenController tController;
-	private NextDayController nController;
-	private RawMaterialsController rController;
-	
-		public GameController() {
-			view= new MainView();
-			
-			tController = new TasksScreenController();
-			rController= new RawMaterialsController(tController);
-			nController= new NextDayController(tController, rController);
-
-			
-			view.addToMainView(nController.getNextDayScreen(), "Game");
-			view.addToMainView(tController.getTasksScreenView(), "Tasks");
-			view.addToMainView(rController.getRawMaterialsScreen(), "Raw");
+public class GameController{
+		private MainView mainView;
+		private MainModel mainModel;
+		
+		public GameController(){
+			mainView = new MainView();
 		}
 		
 		public MainView getMainView(){
-			return view;
+			return mainView;
 		}
-}	
+}
