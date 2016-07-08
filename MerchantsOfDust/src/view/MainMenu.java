@@ -14,6 +14,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 //main menu, should be fairly straightforward. buttons are to be implemented w/ CController
 
+import models.WorldMapModel;
+
 public class MainMenu extends JPanel{
 	
 	public MainMenu(){
@@ -47,6 +49,7 @@ public class MainMenu extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				
 				MainView.getCardLayout().show(MainView.mainViewScreen, "Game");
+				WorldMapModel wm= new WorldMapModel();
 			}
 		});
 		this.add(btnBEButton, gbc_btnMPButton);
